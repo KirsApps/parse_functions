@@ -70,7 +70,7 @@ UriData parseUriData(dynamic value, UriData defaultValue) {
 
 /// Returns parsed [Uri] from [value], if [value] is not a valid URI,
 /// returns [defaultValue]
-Uri parseUri(dynamic value, Uri defaultValue, [int start = 0, int end]) {
+Uri parseUri(dynamic value, Uri defaultValue, [int start = 0, int? end]) {
   if (value == null) {
     return defaultValue;
   } else {
@@ -80,7 +80,7 @@ Uri parseUri(dynamic value, Uri defaultValue, [int start = 0, int end]) {
 
 /// Returns parsed [BigInt] value if [value] can be parsed by [BigInt.tryParse],
 /// in another case returns [defaultValue]
-BigInt parseBigInt(dynamic value, BigInt defaultValue, {int radix}) =>
+BigInt parseBigInt(dynamic value, BigInt defaultValue, {int? radix}) =>
     BigInt.tryParse('$value', radix: radix) ?? defaultValue;
 
 /// Returns parsed [List] from [value].
