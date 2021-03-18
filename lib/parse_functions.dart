@@ -1,5 +1,7 @@
 library parse_functions;
 
+///Signature for function used in [parseList] and [parseListNoCatch] functions
+///which parse given value.
 typedef ParseEntityFunction<T> = T Function(dynamic value);
 
 /// Returns parsed [double] value if [value] can be parsed by [double.tryParse],
