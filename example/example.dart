@@ -1,6 +1,6 @@
 import 'package:parse_functions/parse_functions.dart';
 
-void main() async {
+Future<void> main() async {
   ///double parsing
   parseDouble(null, 2.0);
 
@@ -14,7 +14,7 @@ void main() async {
   parseString(null, 'test');
 
   ///bool parsing
-  parseBool(null, true);
+  parseBool(null, defaultValue: true);
 
   ///DateTime parsing
   parseDateTime(null, DateTime(2000));
@@ -32,10 +32,16 @@ void main() async {
   parseBigInt(null, bigInt);
 
   ///List parsing
-  parseList<String>(null, (value) => parseString(value, ''),
-      defaultValue: ['test']);
+  parseList<String>(
+    null,
+    (value) => parseString(value, ''),
+    defaultValue: ['test'],
+  );
 
   ///ListNoCatch parsing
-  parseListNoCatch<String>(null, (value) => parseString(value, ''),
-      defaultValue: ['test']);
+  parseListNoCatch<String>(
+    null,
+    (value) => parseString(value, ''),
+    defaultValue: ['test'],
+  );
 }

@@ -30,7 +30,7 @@ String parseString(dynamic value, String defaultValue) {
 }
 
 /// Returns parsed [bool] from [value], if [value] can't be parsed returns [defaultValue]
-bool parseBool(dynamic value, bool defaultValue) {
+bool parseBool(dynamic value, {required bool defaultValue}) {
   if ('$value'.toLowerCase() == 'true') {
     return true;
   } else if ('$value'.toLowerCase() == 'false') {
@@ -49,12 +49,16 @@ bool parseBool(dynamic value, bool defaultValue) {
 /// ```dart
 /// parseDateTime('2100-01-01 00:00:00.000', DateTime(2000);
 /// ```
-DateTime parseDateTime(dynamic value, DateTime defaultValue,
-    {bool isSecondsFromEpoch = false}) {
+DateTime parseDateTime(
+  dynamic value,
+  DateTime defaultValue, {
+  bool isSecondsFromEpoch = false,
+}) {
   final timestamp = int.tryParse('$value');
   if (timestamp != null) {
     return DateTime.fromMillisecondsSinceEpoch(
-        isSecondsFromEpoch ? timestamp * 1000 : timestamp);
+      isSecondsFromEpoch ? timestamp * 1000 : timestamp,
+    );
   } else {
     return DateTime.tryParse('$value') ?? defaultValue;
   }
@@ -91,10 +95,13 @@ BigInt parseBigInt(dynamic value, BigInt defaultValue, {int? radix}) =>
 /// which must return parsed <T> value, if [parseFunction] throws an error,
 /// current element will be skipped.
 /// if value is not Iterable or if [list] result is empty returns [defaultValue]
-List<T> parseList<T>(dynamic value, ParseEntityFunction<T> parseFunction,
-    {List<T> defaultValue = const []}) {
+List<T> parseList<T>(
+  dynamic value,
+  ParseEntityFunction<T> parseFunction, {
+  List<T> defaultValue = const [],
+}) {
   if (value is Iterable) {
-    var list = <T>[];
+    final list = <T>[];
     for (final entity in value) {
       try {
         list.add(parseFunction(entity));
@@ -114,10 +121,13 @@ List<T> parseList<T>(dynamic value, ParseEntityFunction<T> parseFunction,
 /// which must return parsed <T> value, if [parseFunction] throws an error,
 /// execution will be terminated.
 /// if value is not Iterable or if [list] result is empty returns [defaultValue]
-List<T> parseListNoCatch<T>(dynamic value, ParseEntityFunction<T> parseFunction,
-    {List<T> defaultValue = const []}) {
+List<T> parseListNoCatch<T>(
+  dynamic value,
+  ParseEntityFunction<T> parseFunction, {
+  List<T> defaultValue = const [],
+}) {
   if (value is Iterable) {
-    var list = <T>[];
+    final list = <T>[];
     for (final entity in value) {
       list.add(parseFunction(entity));
     }

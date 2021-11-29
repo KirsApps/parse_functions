@@ -1,6 +1,5 @@
-import 'package:test/test.dart';
-
 import 'package:parse_functions/parse_functions.dart';
+import 'package:test/test.dart';
 
 void main() {
   group('parse double', () {
@@ -56,19 +55,19 @@ void main() {
 
   group('parse bool', () {
     test('null', () {
-      expect(parseBool(null, true), true);
+      expect(parseBool(null, defaultValue: true), true);
     });
 
     test('normal value', () {
-      expect(parseBool(false, true), false);
+      expect(parseBool(false, defaultValue: true), false);
     });
 
     test('string normal value', () {
-      expect(parseBool('False', true), false);
+      expect(parseBool('False', defaultValue: true), false);
     });
 
     test('garbage value', () {
-      expect(parseBool(DateTime(2000), true), true);
+      expect(parseBool(DateTime(2000), defaultValue: true), true);
     });
   });
 
@@ -78,8 +77,10 @@ void main() {
     });
 
     test('normal String value', () {
-      expect(parseDateTime('2100-01-01 00:00:00.000', DateTime(2000)),
-          DateTime(2100));
+      expect(
+        parseDateTime('2100-01-01 00:00:00.000', DateTime(2000)),
+        DateTime(2100),
+      );
     });
 
     test('normal timestamp value', () {
@@ -92,8 +93,9 @@ void main() {
 
     test('normal String unix timestamp value', () {
       expect(
-          parseDateTime('4102434000', DateTime(2000), isSecondsFromEpoch: true),
-          DateTime(2100));
+        parseDateTime('4102434000', DateTime(2000), isSecondsFromEpoch: true),
+        DateTime(2100),
+      );
     });
 
     test('garbage value', () {
@@ -109,10 +111,12 @@ void main() {
 
     test('normal value', () {
       expect(
-          parseUriData('data:,Another%20brief%20note',
-                  UriData.parse('data:,A%20brief%20note'))
-              .toString(),
-          equals(UriData.parse('data:,Another%20brief%20note').toString()));
+        parseUriData(
+          'data:,Another%20brief%20note',
+          UriData.parse('data:,A%20brief%20note'),
+        ).toString(),
+        equals(UriData.parse('data:,Another%20brief%20note').toString()),
+      );
     });
 
     test('garbage value', () {
@@ -129,9 +133,12 @@ void main() {
 
     test('normal value', () {
       expect(
-          parseUri('https://www.wikipedia.org',
-              Uri.parse('https://www.google.com/')),
-          Uri.parse('https://www.wikipedia.org'));
+        parseUri(
+          'https://www.wikipedia.org',
+          Uri.parse('https://www.google.com/'),
+        ),
+        Uri.parse('https://www.wikipedia.org'),
+      );
     });
 
     test('garbage value', () {
@@ -159,44 +166,63 @@ void main() {
   group('parse List', () {
     test('null', () {
       expect(
-          parseList<String>(null, (value) => parseString(value, ''),
-              defaultValue: ['test']),
-          ['test']);
+        parseList<String>(
+          null,
+          (value) => parseString(value, ''),
+          defaultValue: ['test'],
+        ),
+        ['test'],
+      );
     });
 
     test('normal value', () {
       expect(
-          parseList<String>(
-              [123, 1234, 12345], (value) => parseString(value, '')),
-          ['123', '1234', '12345']);
+        parseList<String>(
+          [123, 1234, 12345],
+          (value) => parseString(value, ''),
+        ),
+        ['123', '1234', '12345'],
+      );
     });
 
     test('garbage value', () {
-      expect(parseList<int>(['a', 'b', 'c', 4], (value) => int.parse('$value')),
-          [4]);
+      expect(
+        parseList<int>(['a', 'b', 'c', 4], (value) => int.parse('$value')),
+        [4],
+      );
     });
   });
 
   group('parse ListNoCatch', () {
     test('null', () {
       expect(
-          parseListNoCatch<String>(null, (value) => parseString(value, ''),
-              defaultValue: ['test']),
-          ['test']);
+        parseListNoCatch<String>(
+          null,
+          (value) => parseString(value, ''),
+          defaultValue: ['test'],
+        ),
+        ['test'],
+      );
     });
 
     test('normal value', () {
       expect(
-          parseListNoCatch<String>(
-              [123, 1234, 12345], (value) => parseString(value, '')),
-          ['123', '1234', '12345']);
+        parseListNoCatch<String>(
+          [123, 1234, 12345],
+          (value) => parseString(value, ''),
+        ),
+        ['123', '1234', '12345'],
+      );
     });
 
     test('garbage value', () {
       expect(
-          parseListNoCatch<int>(
-              ['a', 'b', 'c', 4], (value) => parseInt(value, 0)),
-          [0, 0, 0, 4]);
+        parseListNoCatch<int>(
+          ['a', 'b', 'c', 4],
+          (value) => parseInt(value, 0),
+        ),
+        [0, 0, 0, 4],
+      );
     });
   });
 }
