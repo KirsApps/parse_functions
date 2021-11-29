@@ -1,6 +1,6 @@
 name: parse_functions
 description: Simple functions that can be used to parse values, most often from json.
-version: 2.0.0
+version: 2.0.1
 homepage: https://github.com/KirsApps/parse_functions
 
 environment:
