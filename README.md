@@ -8,6 +8,8 @@ Contains functions to help you parse values.
 
 ### Functions
 
+All functions below support providing default value if input can't be parsed.
+
 * parseDouble
 * parseInt
 * parseNum
