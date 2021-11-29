@@ -27,9 +27,8 @@ jobs:
 
       - name: Run Tests
         run: |
-          pub global activate test_coverage
-          export PATH=$PATH:$HOME/.pub-cache/bin
-          test_coverage
+          dart run test --coverage=./coverage
+          dart pub global run coverage:format_coverage --packages=.packages --report-on=lib --lcov -o ./coverage/lcov.info -i ./coverage
       - name: Check Code Coverage
         uses: VeryGoodOpenSource/very_good_coverage@v1.2.0
         with:
