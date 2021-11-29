@@ -84,22 +84,35 @@ void main() {
     });
 
     test('normal timestamp value', () {
-      expect(parseDateTime(4102434000000, DateTime(2000)), DateTime(2100));
+      expect(
+        parseDateTime(4102434000000, DateTime(2000)).toUtc(),
+        DateTime(2100).toUtc(),
+      );
     });
 
     test('normal String timestamp value', () {
-      expect(parseDateTime('4102434000000', DateTime(2000)), DateTime(2100));
+      expect(
+        parseDateTime('4102434000000', DateTime(2000)).toUtc(),
+        DateTime(2100).toUtc(),
+      );
     });
 
     test('normal String unix timestamp value', () {
       expect(
-        parseDateTime('4102434000', DateTime(2000), isSecondsFromEpoch: true),
-        DateTime(2100),
+        parseDateTime(
+          '4102434000',
+          DateTime(2000),
+          isSecondsFromEpoch: true,
+        ).toUtc(),
+        DateTime(2100).toUtc(),
       );
     });
 
     test('garbage value', () {
-      expect(parseDateTime('test', DateTime(2000)), DateTime(2000));
+      expect(
+        parseDateTime('test', DateTime(2000)).toUtc(),
+        DateTime(2000).toUtc(),
+      );
     });
   });
 
