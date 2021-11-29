@@ -8,4 +8,4 @@ environment:
 
 dev_dependencies:
   test: 1.16.8
-  pedantic: 1.11.0
+  lint: ^1.7.2
